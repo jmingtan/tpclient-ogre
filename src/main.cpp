@@ -61,12 +61,14 @@ public:
 	}
 
 	bool keyPressed(const OIS::KeyEvent &arg) {
+		return true;
 	}
 
 	bool keyReleased(const OIS::KeyEvent &arg) {
 		OIS::KeyCode kc = arg.key;
 		if (OIS::KC_ESCAPE == kc)
 			m_window->destroy();
+		return true;
 	}
 
 	bool mouseMoved(const OIS::MouseEvent &e) {
