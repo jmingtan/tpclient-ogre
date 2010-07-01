@@ -12,14 +12,27 @@ solution "OgreClient"
         os.rmdir("obj")
     end
 
-    configuration {"linux"}
+    configuration { "*" }
         includedirs {
             os.getenv('OGRE_HOME') .. "/include/OGRE",
             os.getenv('OIS_HOME') .. "/include/OIS",
             "include"
         }
-        libdirs { os.getenv('OGRE_HOME') .. "/lib" }
         links { "OgreMain", "OIS" }
+
+    configuration { "windows" }
+        includedirs {
+            os.getenv('OGRE_HOME') .. "/boost_1_42",
+        }
+        libdirs {
+            os.getenv('OGRE_HOME') .. "/lib/release",
+            os.getenv('OGRE_HOME') .. "/boost_1_42/lib"
+        }
+        buildoptions { "/MD" }
+        flags   { "Optimize" }
+
+    configuration { "linux" }
+        libdirs { os.getenv('OGRE_HOME') .. "/lib" }
 
     project "OgreClient"
         language "C++"
