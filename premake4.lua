@@ -1,4 +1,4 @@
-solution "OgreClient"
+solution "OgreClientPrototyping"
 	configurations { "Release" }
     platforms { "x32" }
 
@@ -98,6 +98,11 @@ solution "OgreClient"
         language "C++"
         kind     "ConsoleApp"
         files  { "**.h", "src/**.cpp" }
+
+    project "OgreClient"
+        language "C++"
+        kind     "ConsoleApp"
+        files  { "**.h", "src/**.cpp", "utils/test_application.cpp" }
 
     project "SceneMgr"
         language "C++"
