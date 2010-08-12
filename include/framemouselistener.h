@@ -1,10 +1,7 @@
 #ifndef FRAMEMOUSELISTENER__H
 #define FRAMEMOUSELISTENER__H
 
-namespace OIS {
-	class MouseEvent;
-	enum MouseButtonID;
-}
+#include <OIS.h>
 
 class FrameMouseListener {
  public:

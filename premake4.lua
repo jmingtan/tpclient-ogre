@@ -66,7 +66,7 @@ solution "OgreClientPrototyping"
             "include",
             "libs",
         }
-		links {"OgreMain", "OIS", "CEGUIBase", "CEGUIOgreRenderer", "CEGUILuaScriptModule", "lua", "luabindd"}
+		links {"OgreMain", "OIS", "CEGUIBase", "CEGUIOgreRenderer", "CEGUILuaScriptModule", "lua", "zmq"}
 		if _ACTION ~= "clean" and os.get() == "linux" then
 			os.mkdir(build_dir)
 			os.execute("cp cfg/linux/*.cfg " .. build_dir)

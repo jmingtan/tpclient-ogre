@@ -44,7 +44,7 @@ void StarmapScene::setupBackground() {
 }
 
 void StarmapScene::createObjects() {
-	Cache cache = Cache();
+	Cache cache;
 	cache.connect();
 	std::vector<TPObject> objects = cache.getObjects();
 	std::vector<TPObject>::iterator i;
@@ -55,9 +55,7 @@ void StarmapScene::createObjects() {
 	}
 
 	camera->lookAt(Vector3(0, 0, 0));
-	cameraNode->translate(Vector3(0.0f, 0.0f, 50000.0f));
-
-	Entity* sphereEnt = sceneManager->createEntity(SceneManager::PT_SPHERE);
+	cameraNode->translate(Vector3(0.0f, 0.0f, 10000.0f));
 }
 
 void StarmapScene::center(MapExtent extents) {
@@ -178,7 +176,7 @@ int main (int argc, char const* argv[]) {
 	//cache.connect();
 	//std::vector<TPObject> objects = cache.getObjects();
 	//cache.getMapExtents();
-	PrototypeApplication app = PrototypeApplication();
+	PrototypeApplication app;
 	if (app.setupApplication()) {
 		Cache *cache = new Cache();
 		StarmapScene scene(cache, app.getSceneManager());
