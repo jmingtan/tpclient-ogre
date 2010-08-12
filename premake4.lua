@@ -17,19 +17,24 @@ solution "OgreClientPrototyping"
         includedirs {
             "$(OGRE_HOME)/include/OGRE",
             "$(OGRE_HOME)/include/OIS",
-            "$(OGRE_HOME)/boost_1_42",
+            --"$(OGRE_HOME)/boost_1_42",
             "$(CEGUI_HOME)/cegui/include",
             "$(LUA_DEV)/include",
             "$(ZMQ_HOME)/include",
+            "$(BOOST_HOME)",
+            "$(PYTHON_HOME)/include",
             "include",
             "libs",
         }
         libdirs {
             "$(OGRE_HOME)/lib/release",
-            "$(OGRE_HOME)/boost_1_42/lib",
+            --"$(OGRE_HOME)/boost_1_42/lib",
             "$(CEGUI_HOME)/lib",
             "$(ZMQ_HOME)/lib",
             "$(LUA_DEV)/lib",
+            "$(PYTHON_HOME)/libs",
+            "$(BOOST_HOME)/stage/lib",
+            "$(BOOST_HOME)/bin.v2/libs/python/build/msvc-9.0express/release/threading-multi",
         }
 		links {"OgreMain", "OIS", "CEGUIBase", "CEGUIOgreRenderer", "lua51", "CEGUILuaScriptModule", "libzmq"}
         buildoptions {"/MD"}
@@ -41,6 +46,7 @@ solution "OgreClientPrototyping"
             os.mkdir(build_dir .. "\\scripts")
 			os.execute("xcopy cfg\\win\\*.cfg " .. build_dir)
             os.execute("xcopy scripts " .. build_dir .. "\\scripts")
+            os.execute("cp " .. os.getenv("BOOST_HOME") .. "/bin.v2/libs/python/build/msvc-9.0express/release/threading-multi/*.dll " .. build_dir)
             for k, v in pairs(ogre_dependencies) do
                 os.execute("xcopy " .. os.getenv("OGRE_HOME") .. "\\bin\\release\\" .. v .. ".dll " .. build_dir)
             end
@@ -94,17 +100,23 @@ solution "OgreClientPrototyping"
 			os.execute("cp cfg/osx/*.cfg " .. build_dir .. "/Contents/Resources")
 		end
 
-    project "OgreClient"
+    project "BoostPy"
+        language "C++"
+        kind     "SharedLib"
+        files  { "**.h", "utils/test_boostpy.cpp" }
+        postbuildcommands { "mv BoostPy.dll boostpy.pyd" }
+
+    project "ZMQTest"
         language "C++"
         kind     "ConsoleApp"
-        files  { "**.h", "src/**.cpp" }
+        files  { "**.h", "libs/**.c", "utils/test_zmq.cpp" }
 
     project "OgreClient"
         language "C++"
         kind     "ConsoleApp"
         files  { "**.h", "src/**.cpp", "utils/test_application.cpp" }
 
-    project "SceneMgr"
+    project "SceneMgrEnum"
         language "C++"
         kind     "ConsoleApp"
         files  { "**.h", "utils/scenemgr.cpp" }
