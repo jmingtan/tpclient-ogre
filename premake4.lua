@@ -10,7 +10,7 @@ solution "OgreClientPrototyping"
     ogre_dependencies = {
         "OgreMain", "OIS", "RenderSystem_Direct3D9", "RenderSystem_GL", "Plugin_ParticleFX" }
     cegui_dependencies = {
-        "CEGUIBase", "CEGUIOgreRenderer", "CEGUIExpatParser", "CEGUIFalagardWRBase", "CEGUILuaScriptModule", "tolua++" }
+        "CEGUIBase", "CEGUIOgreRenderer", "CEGUIExpatParser", "CEGUIFalagardWRBase" }
     cegui_additional_dependencies = { "lua" }
 
 	configuration {"Release", "windows", "vs20*"}
@@ -36,7 +36,7 @@ solution "OgreClientPrototyping"
             "$(BOOST_HOME)/stage/lib",
             "$(BOOST_HOME)/bin.v2/libs/python/build/msvc-9.0express/release/threading-multi",
         }
-		links {"OgreMain", "OIS", "CEGUIBase", "CEGUIOgreRenderer", "lua51", "CEGUILuaScriptModule", "libzmq"}
+		links {"OgreMain", "OIS", "CEGUIBase", "CEGUIOgreRenderer", "libzmq"}
         buildoptions {"/MD"}
         defines { "NDEBUG" }
         flags   { "Optimize" }
@@ -115,6 +115,11 @@ solution "OgreClientPrototyping"
         language "C++"
         kind     "ConsoleApp"
         files  { "**.h", "src/**.cpp", "utils/test_application.cpp" }
+
+    project "Prototype"
+        language "C++"
+        kind     "ConsoleApp"
+        files  { "**.h", "src/framelistener.cpp", "src/protoapp.cpp", "src/protoscene.cpp" }
 
     project "SceneMgrEnum"
         language "C++"
