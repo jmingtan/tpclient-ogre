@@ -87,6 +87,7 @@ void PrototypeApplication::createScene() {
 void PrototypeApplication::createFrameListener() {
 	frameListener = auto_ptr<FrameListener>(new FrameListener(renderWindow, camera));
 	root.get()->addFrameListener(frameListener.get());
+	frameListener.get()->showDebugOverlay(true);
 }
 
 void PrototypeApplication::createGUIRenderer() {
@@ -105,4 +106,12 @@ void PrototypeApplication::loadGUIScheme() {
 
 void PrototypeApplication::start() {
 	root.get()->startRendering();
+}
+
+Ogre::SceneManager* PrototypeApplication::getSceneManager() {
+	return sceneManager;
+}
+
+FrameListener* PrototypeApplication::getFrameListener() {
+	return frameListener.get();
 }

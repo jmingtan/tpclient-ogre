@@ -3,6 +3,12 @@
 #include <vector>
 #include <memory>
 #include <string>
+#include <stdio.h>
+
+#include <OIS.h>
+
+#include "framekeylistener.h"
+#include "framemouselistener.h"
 
 using namespace std;
 
@@ -16,10 +22,15 @@ FrameListener::FrameListener(Ogre::RenderWindow *renderWindow, Ogre::Camera *cam
 
 bool FrameListener::frameStarted(const Ogre::FrameEvent &evt) {
 	keepRendering = !renderWindow->isClosed();
+	keyboard->capture();
+	if (keyListener != NULL)
+		keyListener->keyDown(keyboard);
+	mouse->capture();
 	return keepRendering;
 }
 
 bool FrameListener::frameEnded(const Ogre::FrameEvent &evt) {
+	updateStatistics();
 	return true;
 }
 
@@ -55,15 +66,20 @@ bool FrameListener::keyReleased(const OIS::KeyEvent &arg) {
 }
 
 bool FrameListener::mouseMoved(const OIS::MouseEvent &e) {
-	//m_scene->mouseMoved(e);
+	if (mouseListener != NULL)
+		return mouseListener->mouseMoved(e);
 	return true;
 }
 
 bool FrameListener::mousePressed(const OIS::MouseEvent &e, OIS::MouseButtonID id) {
+	if (mouseListener != NULL)
+		return mouseListener->mousePressed(e, id);
 	return true;
 }
 
 bool FrameListener::mouseReleased(const OIS::MouseEvent &e, OIS::MouseButtonID id) {
+	if (mouseListener != NULL)
+		return mouseListener->mouseReleased(e, id);
 	return true;
 }
 
@@ -73,3 +89,43 @@ void FrameListener::destroy() {
 	OIS::InputManager::destroyInputSystem(inputManager);
 }
 
+void FrameListener::showDebugOverlay(bool show) {
+	Ogre::Overlay *overlay = Ogre::OverlayManager::getSingleton().getByName("Core/DebugOverlay");
+	if (show)
+		overlay->show();
+	else
+		overlay->hide();
+}
+
+void FrameListener::updateStatistics() {
+	char buffer[50];
+	sprintf(buffer, "Average FPS: %f", renderWindow->getAverageFPS());
+	setGuiCaption("Core/AverageFps", buffer);
+
+	sprintf(buffer, "Current FPS: %f", renderWindow->getLastFPS());
+	setGuiCaption("Core/CurrFps",  buffer);
+
+	sprintf(buffer, "Best FPS: %f %d ms", renderWindow->getBestFPS(), renderWindow->getBestFrameTime());
+	setGuiCaption("Core/BestFps", buffer);
+
+	sprintf(buffer, "Worst FPS: %f %d ms", renderWindow->getWorstFPS(), renderWindow->getWorstFrameTime());
+	setGuiCaption("Core/WorstFps", buffer);
+
+	sprintf(buffer, "Triangle Count: %d", renderWindow->getTriangleCount());
+	setGuiCaption("Core/NumTris", buffer);
+
+	setGuiCaption("Core/DebugText", "Prototype Application");
+}
+
+void FrameListener::setGuiCaption(std::string elementName, std::string text) {
+	Ogre::OverlayElement *element = Ogre::OverlayManager::getSingleton().getOverlayElement(elementName, false);
+	element->setCaption(text);
+}
+
+void FrameListener::setKeyListener(FrameKeyListener *keyListener) {
+	this->keyListener = keyListener;
+}
+
+void FrameListener::setMouseListener(FrameMouseListener *mouseListener) {
+	this->mouseListener = mouseListener;
+}

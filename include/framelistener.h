@@ -1,5 +1,11 @@
+#ifndef FRAMELISTENER__H
+#define FRAMELISTENER__H
+
 #include <Ogre.h>
 #include <OIS.h>
+
+class FrameKeyListener;
+class FrameMouseListener;
 
 class FrameListener : public Ogre::FrameListener, OIS::KeyListener, OIS::MouseListener {
  public:
@@ -13,6 +19,11 @@ class FrameListener : public Ogre::FrameListener, OIS::KeyListener, OIS::MouseLi
 	bool mousePressed(const OIS::MouseEvent &e, OIS::MouseButtonID id);
 	bool mouseReleased(const OIS::MouseEvent &e, OIS::MouseButtonID id);
 	void destroy();
+	void showDebugOverlay(bool show);
+	void updateStatistics();
+	void setGuiCaption(std::string elementName, std::string text);
+	void setKeyListener(FrameKeyListener *keyListener);
+	void setMouseListener(FrameMouseListener *mouseListener);
 
  protected:
 	Ogre::RenderWindow *renderWindow;
@@ -22,4 +33,8 @@ class FrameListener : public Ogre::FrameListener, OIS::KeyListener, OIS::MouseLi
 	OIS::Mouse *mouse;
 	OIS::InputManager *inputManager;
 	bool keepRendering;
+	FrameKeyListener *keyListener;
+	FrameMouseListener *mouseListener;
 };
+
+#endif

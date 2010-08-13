@@ -12,6 +12,8 @@ class PrototypeApplication {
  public:
 	bool setupApplication();
 	void start();
+	Ogre::SceneManager* getSceneManager();
+	FrameListener* getFrameListener();
 
  protected:
 	void createLogger();

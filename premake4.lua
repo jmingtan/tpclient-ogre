@@ -119,7 +119,7 @@ solution "OgreClientPrototyping"
     project "Prototype"
         language "C++"
         kind     "ConsoleApp"
-        files  { "**.h", "src/framelistener.cpp", "src/protoapp.cpp", "src/protoscene.cpp" }
+        files  { "**.h", "src/framelistener.cpp", "src/proto*.cpp", "libs/**.c" }
 
     project "SceneMgrEnum"
         language "C++"
