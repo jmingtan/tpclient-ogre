@@ -3,8 +3,11 @@
 #include <iostream>
 #include <stdio.h>
 
+#include <CEGUI.h>
+
 #include "protoapp.h"
 #include "protocache.h"
+#include "ceguiutils.h"
 
 using namespace Ogre;
 using namespace std;
@@ -37,10 +40,12 @@ void StarmapScene::setupCamera() {
 }
 
 void StarmapScene::setupGui() {
+	CEGUI::Window *system = CEGUI::WindowManager::getSingleton().loadWindowLayout("system.layout");
+	CEGUI::System::getSingleton().getGUISheet()->addChildWindow(system);
 }
 
 void StarmapScene::setupBackground() {
-	sceneManager->setSkyBox(true, "skybox/SpaceSkyBox");
+	//sceneManager->setSkyBox(true, "skybox/SpaceSkyBox");
 }
 
 void StarmapScene::createObjects() {
@@ -158,32 +163,39 @@ void StarmapScene::zoom(int amount) {
 }
 
 bool StarmapScene::mouseMoved(const OIS::MouseEvent &e) {
-	camera->yaw(Ogre::Degree(-e.state.X.rel * 0.13));
-	camera->pitch(Ogre::Degree(-e.state.Y.rel * 0.13));
+	//camera->yaw(Ogre::Degree(-e.state.X.rel * 0.13));
+	//camera->pitch(Ogre::Degree(-e.state.Y.rel * 0.13));
+	CEGUI::System *system = CEGUI::System::getSingletonPtr();
+	CEGUI::Size size = system->getRenderer()->getDisplaySize();
+	system->injectMouseMove(e.state.X.rel, e.state.Y.rel);
 	return true;
 }
 
 bool StarmapScene::mousePressed(const OIS::MouseEvent &e, OIS::MouseButtonID id) {
+	CEGUI::MouseButton button = convertOISButtonToCEGUI(id);
+	CEGUI::System::getSingleton().injectMouseButtonDown(button);
 	return true;
 }
 
 bool StarmapScene::mouseReleased(const OIS::MouseEvent &e, OIS::MouseButtonID id) {
+	CEGUI::MouseButton button = convertOISButtonToCEGUI(id);
+	CEGUI::System::getSingleton().injectMouseButtonUp(button);
 	return true;
 }
 
 int main (int argc, char const* argv[]) {
-	//Cache cache = Cache();
-	//cache.connect();
+	Cache cache;
+	cache.connect();
 	//std::vector<TPObject> objects = cache.getObjects();
 	//cache.getMapExtents();
-	PrototypeApplication app;
-	if (app.setupApplication()) {
-		Cache *cache = new Cache();
-		StarmapScene scene(cache, app.getSceneManager());
-		scene.setup();
-		app.getFrameListener()->setKeyListener(&scene);
-		app.getFrameListener()->setMouseListener(&scene);
-		app.start();
-	}
+	//PrototypeApplication app;
+	//if (app.setupApplication()) {
+		//Cache *cache = new Cache();
+		//StarmapScene scene(cache, app.getSceneManager());
+		//scene.setup();
+		//app.getFrameListener()->setKeyListener(&scene);
+		//app.getFrameListener()->setMouseListener(&scene);
+		//app.start();
+	//}
 	return 0;
 }

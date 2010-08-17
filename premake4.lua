@@ -70,7 +70,7 @@ solution "OgreClientPrototyping"
 		if _ACTION ~= "clean" and os.get() == "linux" then
 			os.mkdir(build_dir)
 			os.execute("cp cfg/linux/*.cfg " .. build_dir)
-			os.execute("cp -r scripts " .. build_dir)
+			--os.execute("cp -r scripts " .. build_dir)
 		end
 
 	configuration {"Release", "macosx"}

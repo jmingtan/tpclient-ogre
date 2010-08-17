@@ -3,6 +3,7 @@
 
 #include <vector>
 #include <memory>
+#include <string>
 #include <zmq.hpp>
 
 struct Position {
@@ -11,6 +12,7 @@ struct Position {
 
 struct TPObject {
 	int id;
+	std::string name;
 	Position pos;
 };
 

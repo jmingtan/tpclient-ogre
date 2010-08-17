@@ -1,7 +1,14 @@
+import sys
+sys.path.append("libtpproto-py")
+sys.path.append("libtpclient-py")
+
 import zmq
 import json
 import pickle
 import math
+
+import tp.client.threads as tpthread
+import tp.client.cache as tpcache
 
 UNIVERSE =  1
 STAR =  2
@@ -11,25 +18,51 @@ WORMHOLE =  5
 
 distance_units = 25000
 
-def pickle_load(name="pickle"):
-	return_object = None
-	f = None
-	try:
-		f = open("%s_dump" % name, 'r')
-		return_object = pickle.load(f)
-	finally:
-		if f != None:
-			f.close()
-	return return_object
+class GUI(object):
+	def __init__(self, application):
+		self.application = application
+		self.connected = False
 
-class DummyCache(object):
-	def __init__(self):
-		self.objects = pickle_load("object")
-		self.messages = pickle_load("message")
-		self.designs = pickle_load("design")
-		self.players = pickle_load("player")
-		self.resources = pickle_load("resource")
-		self.orders = {}
+	def ConfigLoad(self, config):
+		pass
+	
+	def Call(self, method, *args, **kw):
+		"""Call a method in this thread"""
+		method(*args, **kw)
+
+	def Post(self, event):
+		"""Post an Event into the current window"""
+		print socket.send("%s %s" % (event.__class__, json.dumps(evt.__dict__))
+		
+	def Cleanup(self):
+		self.application.Exit()
+		self.application.finder.remote.exit()
+
+	def start(self):
+		print "connecting"
+		self.application.network.Call(self.connect, "localhost", "jmtan", "123", True)
+		while not self.connected:
+			pass
+
+	def connect(self, host, username, password, debug=True):
+		def connect_callback(*args, **kw):
+			print "connection callback", args, kw
+
+		def cache_callback(*args, **kw):
+			print "cache callback", args, kw
+
+		if self.application.network.ConnectTo(host, username, password, debug, connect_callback):
+			self.application.network.CacheUpdate(cache_callback)
+			self.application.cache.CacheUpdateEvent(None)
+			print "connection success, now serving content"
+			serve(self.application.cache)
+
+class TPApplication(tpthread.Application):
+	GUIClass = GUI
+	NetworkClass = tpthread.NetworkThread
+	MediaClass = tpthread.MediaThread
+	FinderClass = tpthread.FinderThread
+	ConfigFile = "pyogre_preferences"
 
 class Map(object):
 	def __init__(self, objects):
@@ -49,7 +82,7 @@ class Map(object):
 		for obj in self.objects.values():
 			if obj._subtype is not STAR:
 				continue
-			x, y, z = obj.pos
+			x, y, z = obj.Positional[0][0]
 
 			if lower_left[0] > x:
 				lower_left[0] = x
@@ -71,7 +104,7 @@ class Map(object):
 		for obj in self.objects.values():
 			if obj._subtype is not STAR:
 				continue
-			x, y, z = obj.pos
+			x, y, z = obj.Positional[0][0]
 			if x < self.map_lower_left[0]:
 				self.map_lower_left[0] = x
 			if y < self.map_lower_left[1]:
@@ -89,30 +122,26 @@ class Map(object):
 				(position[2] / self.map_scale) * distance_units,
 				)
 
-def handleQuery(query, socket, cache, map):
+def serve(cache):
 	def getObjects():
-		objecs = {}
+		objects = {}
+		starmap = Map(cache.objects)
+		starmap.update()
 		for obj in cache.objects.values():
-			objects[obj.id] = [obj.name, starmap.getScaledPosition(obj.pos)]
+			objects[obj.id] = starmap.getScaledPosition(obj.Positional[0][0])
 		return objects
 
 	def getMapExtents():
-		return [map.map_lower_left, map.map_upper_right]
-
-	print query
-	socket.send(json.dumps(eval(query)));
-
-if __name__ == "__main__":
-	cache = DummyCache()
-	starmap = Map(cache.objects)
-	starmap.update()
-
-	#import pdb
-	#pdb.set_trace()
+		return [starmap.map_lower_left, starmap.map_upper_right]
 
 	context = zmq.Context(1)
 	socket = context.socket(zmq.REP)
 	socket.bind("tcp://127.0.0.1:5555")
+
 	while True:
-		handleQuery(socket.recv(), socket, cache, map)
+		socket.send(json.dumps(eval(socket.recv())))
+
+if __name__ == "__main__":
+	app = TPApplication()
+	app.Run();
 

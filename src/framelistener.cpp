@@ -1,7 +1,6 @@
 #include "framelistener.h"
 
 #include <vector>
-#include <memory>
 #include <string>
 #include <stdio.h>
 
@@ -16,7 +15,7 @@ FrameListener::FrameListener(Ogre::RenderWindow *renderWindow, Ogre::Camera *cam
 	this->renderWindow = renderWindow;
 	this->camera = camera;
 	keepRendering = true;
-	timer = new Ogre::Timer();
+	guiTimer = new Ogre::Timer();
 	setupInput();
 }
 
@@ -25,7 +24,7 @@ bool FrameListener::frameStarted(const Ogre::FrameEvent &evt) {
 	keyboard->capture();
 	if (keyListener != NULL)
 		keyListener->keyDown(keyboard);
-	mouse->capture();
+	//mouse->capture();
 	return keepRendering;
 }
 
@@ -45,10 +44,10 @@ void FrameListener::setupInput() {
 	try {
 		keyboard = static_cast<OIS::Keyboard*>(inputManager->createInputObject(OIS::OISKeyboard, true));
 		keyboard->setEventCallback(this);
-		mouse = static_cast<OIS::Mouse*>(inputManager->createInputObject(OIS::OISMouse, true));
-		mouse->setEventCallback(this);
-		mouse->getMouseState().width = renderWindow->getWidth();
-		mouse->getMouseState().height = renderWindow->getHeight();
+		//mouse = static_cast<OIS::Mouse*>(inputManager->createInputObject(OIS::OISMouse, true));
+		//mouse->setEventCallback(this);
+		//mouse->getMouseState().width = renderWindow->getWidth();
+		//mouse->getMouseState().height = renderWindow->getHeight();
 	} catch (const OIS::Exception &e) {
 		throw Ogre::Exception(42, e.eText, "FrameListener::setupInput");
 	}

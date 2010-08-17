@@ -15,14 +15,14 @@ using namespace std;
 bool Cache::connect() {
 	context = auto_ptr<context_t>(new context_t(1));
 	socket = auto_ptr<socket_t>(new socket_t(*context.get(), ZMQ_REQ));
-	socket.get()->connect("tcp://localhost:5555");
+	socket.get()->connect("tcp://127.0.0.1:5555");
 	return true;
 }
 
 std::vector<TPObject> Cache::getObjects() {
-	std::vector<TPObject> objects;
+	vector<TPObject> objects;
 
-	string queryString("{\"operation\": \"getObjects\"}");
+	string queryString("getObjects()");
 	message_t query(queryString.length());
 	memcpy(query.data(), queryString.c_str(), queryString.length());
 	socket.get()->send(query);
@@ -37,7 +37,8 @@ std::vector<TPObject> Cache::getObjects() {
 	cJSON* tempJSON = resultJSON->child;
 	for (i = 0; i < cJSON_GetArraySize(resultJSON); i++) {
 		TPObject object;
-		cJSON* posArray = tempJSON->child;
+		cJSON* objArray = tempJSON->child;
+		cJSON* posArray = objArray->child->next;
 
 		object.id = atoi(tempJSON->string);
 		Position pos;
@@ -57,7 +58,7 @@ std::vector<TPObject> Cache::getObjects() {
 MapExtent Cache::getMapExtents() {
 	MapExtent extents;
 
-	string queryString("{\"operation\": \"getMapExtents\"}");
+	string queryString("getMapExtents");
 	message_t query(queryString.length());
 	memcpy(query.data(), queryString.c_str(), queryString.length());
 	socket.get()->send(query);

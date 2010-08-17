@@ -28,7 +28,7 @@ class FrameListener : public Ogre::FrameListener, OIS::KeyListener, OIS::MouseLi
  protected:
 	Ogre::RenderWindow *renderWindow;
 	Ogre::Camera *camera;
-	Ogre::Timer *timer;
+	Ogre::Timer *guiTimer;
 	OIS::Keyboard *keyboard;
 	OIS::Mouse *mouse;
 	OIS::InputManager *inputManager;
