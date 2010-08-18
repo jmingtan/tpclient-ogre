@@ -104,13 +104,13 @@ void FrameListener::updateStatistics() {
 	sprintf(buffer, "Current FPS: %f", renderWindow->getLastFPS());
 	setGuiCaption("Core/CurrFps",  buffer);
 
-	sprintf(buffer, "Best FPS: %f %d ms", renderWindow->getBestFPS(), renderWindow->getBestFrameTime());
+	sprintf(buffer, "Best FPS: %f %f ms", renderWindow->getBestFPS(), renderWindow->getBestFrameTime());
 	setGuiCaption("Core/BestFps", buffer);
 
-	sprintf(buffer, "Worst FPS: %f %d ms", renderWindow->getWorstFPS(), renderWindow->getWorstFrameTime());
+	sprintf(buffer, "Worst FPS: %f %f ms", renderWindow->getWorstFPS(), renderWindow->getWorstFrameTime());
 	setGuiCaption("Core/WorstFps", buffer);
 
-	sprintf(buffer, "Triangle Count: %d", renderWindow->getTriangleCount());
+	sprintf(buffer, "Triangle Count: %d", (int) renderWindow->getTriangleCount());
 	setGuiCaption("Core/NumTris", buffer);
 
 	setGuiCaption("Core/DebugText", "Prototype Application");

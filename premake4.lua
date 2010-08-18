@@ -95,9 +95,10 @@ solution "OgreClientPrototyping"
 			os.mkdir(build_dir .. "/Contents/Plugins")
             os.execute("cp " .. os.getenv('OGRE_HOME') .. "/lib/*.dylib " .. build_dir .. "/Contents/Plugins")
             os.execute("cp -r " .. os.getenv('CEGUI_HOME') .. "/PlugInBundles/Release/*.bundle " .. build_dir .. "/Contents/Plugins")
-            os.execute("cp -r media " .. build_dir)
-            os.execute("cp -r scripts " .. build_dir)
-			os.execute("cp cfg/osx/*.cfg " .. build_dir .. "/Contents/Resources")
+            --os.execute("cp -r media " .. build_dir)
+            --os.execute("cp -r scripts " .. build_dir)
+			--os.execute("cp cfg/osx/*.cfg " .. build_dir .. "/Contents/Resources")
+            os.execute("cp cfg/osx/*.cfg " .. build_dir)
 		end
 
     project "BoostPy"
