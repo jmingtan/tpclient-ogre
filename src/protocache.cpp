@@ -37,9 +37,9 @@ std::vector<TPObject> Cache::getObjects() {
 	cJSON* tempJSON = resultJSON->child;
 	for (i = 0; i < cJSON_GetArraySize(resultJSON); i++) {
 		TPObject object;
-		cJSON* objArray = tempJSON->child;
-		cJSON* posArray = objArray->child->next;
+		cJSON* posArray = tempJSON->child->next->child;
 
+		object.name = tempJSON->child->valuestring;
 		object.id = atoi(tempJSON->string);
 		Position pos;
 		pos.x = posArray->valueint; posArray = posArray->next;

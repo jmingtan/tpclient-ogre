@@ -91,7 +91,7 @@ class Map(object):
 
 def handleQuery(query, socket, cache, map):
 	def getObjects():
-		objecs = {}
+		objects = {}
 		for obj in cache.objects.values():
 			objects[obj.id] = [obj.name, starmap.getScaledPosition(obj.pos)]
 		return objects

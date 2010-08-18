@@ -184,18 +184,18 @@ bool StarmapScene::mouseReleased(const OIS::MouseEvent &e, OIS::MouseButtonID id
 }
 
 int main (int argc, char const* argv[]) {
-	Cache cache;
-	cache.connect();
+	//Cache cache;
+	//cache.connect();
 	//std::vector<TPObject> objects = cache.getObjects();
 	//cache.getMapExtents();
-	//PrototypeApplication app;
-	//if (app.setupApplication()) {
-		//Cache *cache = new Cache();
-		//StarmapScene scene(cache, app.getSceneManager());
-		//scene.setup();
-		//app.getFrameListener()->setKeyListener(&scene);
-		//app.getFrameListener()->setMouseListener(&scene);
-		//app.start();
-	//}
+	PrototypeApplication app;
+	if (app.setupApplication()) {
+		Cache *cache = new Cache();
+		StarmapScene scene(cache, app.getSceneManager());
+		scene.setup();
+		app.getFrameListener()->setKeyListener(&scene);
+		app.getFrameListener()->setMouseListener(&scene);
+		app.start();
+	}
 	return 0;
 }
