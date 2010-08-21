@@ -8,6 +8,7 @@
 
 #include "framekeylistener.h"
 #include "framemouselistener.h"
+#include "frameupdatelistener.h"
 
 using namespace std;
 
@@ -17,6 +18,9 @@ FrameListener::FrameListener(Ogre::RenderWindow *renderWindow, Ogre::Camera *cam
 	keepRendering = true;
 	guiTimer = new Ogre::Timer();
 	setupInput();
+	keyListener = NULL;
+	mouseListener = NULL;
+	updateListener = NULL;
 }
 
 bool FrameListener::frameStarted(const Ogre::FrameEvent &evt) {
@@ -25,10 +29,14 @@ bool FrameListener::frameStarted(const Ogre::FrameEvent &evt) {
 	if (keyListener != NULL)
 		keyListener->keyDown(keyboard);
 	//mouse->capture();
+	if (updateListener != NULL)
+		updateListener->frameStarted(evt);
 	return keepRendering;
 }
 
 bool FrameListener::frameEnded(const Ogre::FrameEvent &evt) {
+	if (updateListener != NULL)
+		updateListener->frameEnded(evt);
 	updateStatistics();
 	return true;
 }
@@ -127,4 +135,8 @@ void FrameListener::setKeyListener(FrameKeyListener *keyListener) {
 
 void FrameListener::setMouseListener(FrameMouseListener *mouseListener) {
 	this->mouseListener = mouseListener;
+}
+
+void FrameListener::setUpdateListener(FrameUpdateListener *updateListener) {
+	this->updateListener = updateListener;
 }

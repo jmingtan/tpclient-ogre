@@ -6,6 +6,7 @@
 
 class FrameKeyListener;
 class FrameMouseListener;
+class FrameUpdateListener;
 
 class FrameListener : public Ogre::FrameListener, OIS::KeyListener, OIS::MouseListener {
  public:
@@ -24,6 +25,7 @@ class FrameListener : public Ogre::FrameListener, OIS::KeyListener, OIS::MouseLi
 	void setGuiCaption(std::string elementName, std::string text);
 	void setKeyListener(FrameKeyListener *keyListener);
 	void setMouseListener(FrameMouseListener *mouseListener);
+	void setUpdateListener(FrameUpdateListener *updateListener);
 
  protected:
 	Ogre::RenderWindow *renderWindow;
@@ -35,6 +37,7 @@ class FrameListener : public Ogre::FrameListener, OIS::KeyListener, OIS::MouseLi
 	bool keepRendering;
 	FrameKeyListener *keyListener;
 	FrameMouseListener *mouseListener;
+	FrameUpdateListener *updateListener;
 };
 
 #endif

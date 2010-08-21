@@ -1,8 +1,10 @@
 #include "objectoverlay.h"
 
+#include <sstream>
 #include <cmath>
 
 #include <Ogre.h>
+#include <OgreTextAreaOverlayElement.h>
 
 using namespace Ogre;
 using namespace std;
@@ -16,19 +18,27 @@ ObjectOverlay::ObjectOverlay(Ogre::SceneNode *node, int objectId, std::string na
 void ObjectOverlay::initialise() {
 	OverlayManager *overlayManager = OverlayManager::getSingletonPtr();
 
-	string panelName = "Panel" + objectId;
+	stringstream out;
+	out << objectId;
+
+	string panelName = "Panel" + out.str();
 	panel = (OverlayContainer *) overlayManager->createOverlayElement("Panel", panelName);
 	panel->setMetricsMode(GMM_PIXELS);
+	panel->show();
 
-	string textName = "Name" + objectId;
-	nameElement = overlayManager->createOverlayElement("Name", textName);
+	string textName = "Name" + out.str();
+	nameElement = (TextAreaOverlayElement *) overlayManager->createOverlayElement("TextArea", textName);
 	nameElement->setMetricsMode(GMM_PIXELS);
 	nameElement->setCaption(objectName);
+	nameElement->setCharHeight(16);
+	nameElement->setFontName("Tahoma-12");
+	nameElement->show();
 
-	string overlayName = "Overlay" + objectId;
+	string overlayName = "Overlay" + out.str();
 	overlay = overlayManager->create(overlayName);
 	overlay->add2D(panel);
 	panel->addChild(nameElement);
+	overlay->show();
 }
 
 void ObjectOverlay::destroy() {
@@ -46,7 +56,6 @@ void ObjectOverlay::setVisible(bool visible) {
 }
 
 void ObjectOverlay::update(Ogre::Camera *camera) {
-	MovableObject *entity = node->getAttachedObject(0);
 	Vector3 position = node->_getWorldAABB().getMaximum();
 	position = camera->getViewMatrix() * position;
 	position = camera->getProjectionMatrix() * position;

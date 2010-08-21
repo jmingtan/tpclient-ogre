@@ -3,6 +3,7 @@
 
 #include "framekeylistener.h"
 #include "framemouselistener.h"
+#include "frameupdatelistener.h"
 
 #include <vector>
 #include <map>
@@ -10,10 +11,11 @@
 #include <Ogre.h>
 
 class Cache;
+class ObjectOverlay;
 struct TPObject;
 struct MapExtent;
 
-class StarmapScene : public FrameKeyListener, public FrameMouseListener {
+class StarmapScene : public FrameKeyListener, public FrameMouseListener, public FrameUpdateListener {
  public:
 	StarmapScene(Cache *cache, Ogre::SceneManager *sceneManager);
 	void setup();
@@ -29,10 +31,13 @@ class StarmapScene : public FrameKeyListener, public FrameMouseListener {
 	virtual bool mouseMoved(const OIS::MouseEvent &e);
 	virtual bool mousePressed(const OIS::MouseEvent &e, OIS::MouseButtonID id);
 	virtual bool mouseReleased(const OIS::MouseEvent &e, OIS::MouseButtonID id);
+	virtual bool frameStarted(const Ogre::FrameEvent &evt);
+	virtual bool frameEnded(const Ogre::FrameEvent &evt);
 
  protected:
 	std::map<int, Ogre::SceneNode *> nodes;
 	std::vector<Ogre::SceneNode *> stars;
+	std::vector<ObjectOverlay *> overlays;
 	Cache *cache;
 	Ogre::SceneManager *sceneManager;
 	Ogre::SceneNode *rootNode;

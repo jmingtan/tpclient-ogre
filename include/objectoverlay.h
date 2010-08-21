@@ -10,7 +10,7 @@ namespace Ogre {
 	class ColourValue;
 	class Overlay;
 	class OverlayContainer;
-	class OverlayElement;
+	class TextAreaOverlayElement;
 }
 
 class ObjectOverlay {
@@ -27,7 +27,7 @@ class ObjectOverlay {
 	Ogre::SceneNode *node;
 	Ogre::Overlay *overlay;
 	Ogre::OverlayContainer *panel;
-	Ogre::OverlayElement *nameElement;
+	Ogre::TextAreaOverlayElement *nameElement;
 	std::string entityName;
 	std::string objectName;
 	int objectId;

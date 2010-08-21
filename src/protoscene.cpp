@@ -8,6 +8,7 @@
 #include "protoapp.h"
 #include "protocache.h"
 #include "ceguiutils.h"
+#include "objectoverlay.h"
 
 using namespace Ogre;
 using namespace std;
@@ -87,6 +88,13 @@ Ogre::SceneNode* StarmapScene::addStar(TPObject object, Ogre::Vector3 position) 
 	light->setPosition(position);
 	light->setType(Ogre::Light::LT_POINT);
 	light->setAttenuation(500, 1, 0, 0);
+
+	sprintf(buffer, "Object%i_EntityNode", object.id);
+	SceneNode *entityNode = sceneManager->getSceneNode(buffer);
+	ObjectOverlay *label = new ObjectOverlay(entityNode, object.id, object.name);
+	label->initialise();
+	overlays.push_back(label);
+	label->update(camera);
 
 	sprintf(buffer, "Object%i", object.id);
 	Ogre::Entity *entity = sceneManager->getEntity(buffer);
@@ -183,6 +191,18 @@ bool StarmapScene::mouseReleased(const OIS::MouseEvent &e, OIS::MouseButtonID id
 	return true;
 }
 
+bool StarmapScene::frameStarted(const Ogre::FrameEvent &evt) {
+	std::vector<ObjectOverlay *>::iterator i;
+	for (i = overlays.begin(); i < overlays.end(); i++) {
+		(*i)->update(camera);
+	}
+	return true;
+}
+
+bool StarmapScene::frameEnded(const Ogre::FrameEvent &evt) {
+	return true;
+}
+
 int main (int argc, char const* argv[]) {
 	//Cache cache;
 	//cache.connect();
@@ -195,6 +215,7 @@ int main (int argc, char const* argv[]) {
 		scene.setup();
 		app.getFrameListener()->setKeyListener(&scene);
 		app.getFrameListener()->setMouseListener(&scene);
+		app.getFrameListener()->setUpdateListener(&scene);
 		app.start();
 	}
 	return 0;
