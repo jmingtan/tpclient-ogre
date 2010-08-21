@@ -1,0 +1,193 @@
+material Starmap/Base
+{
+	technique
+	{
+		pass
+		{
+			// sphere.mesh links to this
+		}
+	}
+}
+
+material Starmap/Stars
+{
+	technique
+	{
+		pass
+		{
+			lighting off
+			scene_blend add
+			depth_write off
+
+			texture_unit
+			{
+				colour_op_ex modulate src_manual src_current 1 1 1
+			}
+		}
+	}
+}
+
+material Starmap/Icons/Planets
+{
+	technique
+	{
+		pass
+		{
+			scene_blend add
+			texture_unit
+			{
+				texture s_icon.png
+				colour_op_ex modulate_x2 src_manual src_texture 1 1 1
+			}
+			texture_unit
+			{
+				colour_op_ex modulate src_manual src_current 1 1 1
+			}
+		}
+	}
+}
+
+material Starmap/Icons/Fleets
+{
+	technique
+	{
+		pass
+		{
+			scene_blend add
+			texture_unit
+			{
+				texture f_icon.png
+				colour_op_ex modulate_x2 src_manual src_texture 1 1 1
+			}
+			texture_unit
+			{
+				colour_op_ex modulate_x4 src_manual src_current 1 1 1
+			}
+		}
+	}
+}
+
+material Starmap/Icons/Stars
+{
+	technique
+	{
+		pass
+		{
+			scene_blend add
+			texture_unit
+			{
+				texture s_icon.png
+			}
+		}
+	}
+}
+
+material Starmap/Sun
+{
+	technique
+	{
+		pass
+		{
+			emissive 1 1 1 1
+		}
+	}
+}
+
+material Starmap/Sun/Orange : Starmap/Sun
+{
+	technique
+	{
+		pass
+		{
+			texture_unit
+			{
+				texture orange_star.jpg
+			}
+		}
+	}
+}
+
+material Starmap/Sun/Green : Starmap/Sun
+{
+	technique
+	{
+		pass
+		{
+			texture_unit
+			{
+				texture greensun.jpg
+			}
+		}
+	}
+}
+
+material Starmap/Sun/White : Starmap/Sun
+{
+	technique
+	{
+		pass
+		{
+			texture_unit
+			{
+				texture white_star.jpg
+			}
+		}
+	}
+}
+
+material Starmap/Planet
+{
+	technique
+	{
+		pass
+		{
+			ambient 1 1 1 1
+			diffuse 1 1 1 1
+			specular 0 0 0 0 60
+			emissive 0 0 0 1
+		}
+	}
+}
+
+material Starmap/Planet/Terran : Starmap/Planet
+{
+	technique
+	{
+		pass
+		{
+			texture_unit
+			{
+				texture earth.jpg
+			}
+		}
+	}
+}
+
+material Starmap/Planet/Ocean : Starmap/Planet
+{
+	technique
+	{
+		pass
+		{
+			texture_unit
+			{
+				texture oceanBase.jpg
+			}
+		}
+	}
+}
+
+material Starmap/Planet/Arid : Starmap/Planet
+{
+	technique
+	{
+		pass
+		{
+			texture_unit
+			{
+				texture terr_rock-dirt.jpg
+			}
+		}
+	}
+}
+

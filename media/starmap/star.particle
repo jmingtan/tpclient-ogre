@@ -1,0 +1,55 @@
+Space/Stars/Large
+{
+   material        Starmap/Stars
+   particle_width  70
+   particle_height 70
+   cull_each       true
+   quota           2000
+   billboard_type  point
+
+   // Area emitter
+   emitter HollowEllipsoid
+   {
+       angle           30
+       emission_rate   2000
+	   colour_range_start 0.5 0.5 0.5
+	   colour_range_end 0.5 0.5 0.9
+       time_to_live_min 9999
+       time_to_live_max 9999
+       direction       0 1 0
+       velocity       0.001
+       width           100000
+       height          100000
+       depth           100000
+	   inner_width     0.9
+	   inner_height    0.9
+	   inner_depth     0.9
+   }
+}
+
+Space/Stars/Small
+{
+   material        Starmap/Stars
+   particle_width  25
+   particle_height 25
+   cull_each       true
+   quota           5000
+   billboard_type  point
+
+   // Area emitter
+   emitter Ellipsoid
+   {
+       angle           30
+       emission_rate   5000
+	   colour_range_start 1 0.7 0.7
+	   colour_range_end 1 1 1
+       time_to_live_min 9999
+       time_to_live_max 9999
+       direction       0 1 0
+       velocity       0.001
+       //colour 0.15 0.1 0.0
+       width           100000
+       height          100000
+       depth           100
+   }
+}

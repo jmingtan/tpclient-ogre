@@ -1,0 +1,18 @@
+material Ships/Plowshare
+{
+	technique
+	{
+		pass
+		{
+			ambient 0.65 0.65 0.65 1
+			diffuse 1 1 1 1
+			specular 1 1 1 1 60
+			emissive 0 0 0 1
+
+			texture_unit
+			{
+				texture wayfarer.png
+			}
+		}
+	}
+}
