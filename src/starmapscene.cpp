@@ -50,9 +50,7 @@ void StarmapScene::setupBackground() {
 }
 
 void StarmapScene::createObjects() {
-	Cache cache;
-	cache.connect();
-	std::vector<TPObject> objects = cache.getObjects();
+	std::vector<TPObject> objects = cache->getObjects();
 	std::vector<TPObject>::iterator i;
 
 	for (i = objects.begin(); i != objects.end(); i++) {

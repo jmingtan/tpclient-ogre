@@ -8,28 +8,21 @@
 
 #include "clientapp.h"
 #include "starmapscene.h"
+#include "connection.h"
 
-using namespace zmq;
 using namespace std;
 
-bool Cache::connect() {
-	context = auto_ptr<context_t>(new context_t(1));
-	socket = auto_ptr<socket_t>(new socket_t(*context.get(), ZMQ_REQ));
-	socket.get()->connect("tcp://127.0.0.1:5555");
-	return true;
+Cache::Cache(Connection *connection) {
+	this->connection = connection;
 }
 
 std::vector<TPObject> Cache::getObjects() {
 	vector<TPObject> objects;
 
 	string queryString("getObjects()");
-	message_t query(queryString.length());
-	memcpy(query.data(), queryString.c_str(), queryString.length());
-	socket.get()->send(query);
+	connection->send(queryString);
 
-	message_t response;
-	socket.get()->recv(&response);
-	string resultString((const char *) response.data());
+	string resultString = connection->recv();
 	cout << resultString << endl;
 
 	cJSON* resultJSON = cJSON_Parse(resultString.c_str());
@@ -53,36 +46,5 @@ std::vector<TPObject> Cache::getObjects() {
 	cJSON_Delete(resultJSON);
 
 	return objects;
-}
-
-MapExtent Cache::getMapExtents() {
-	MapExtent extents;
-
-	string queryString("getMapExtents");
-	message_t query(queryString.length());
-	memcpy(query.data(), queryString.c_str(), queryString.length());
-	socket.get()->send(query);
-
-	message_t response;
-	socket.get()->recv(&response);
-	string resultString((const char *) response.data());
-	cout << resultString << endl;
-
-	cJSON* resultJSON = cJSON_Parse(resultString.c_str());
-	cJSON* tempJSON = resultJSON->child;
-	cout << tempJSON->child->valuedouble << endl;
-	extents.lowerLeftX = tempJSON->child->valuedouble;
-	extents.lowerLeftY = tempJSON->child->next->valuedouble;
-	cout << extents.lowerLeftX << " " << extents.lowerLeftY << endl;
-
-	tempJSON = tempJSON->next;
-	extents.upperRightX = tempJSON->child->valuedouble;
-	extents.upperRightY = tempJSON->child->next->valuedouble;
-
-	cout << extents.upperRightX << " " << extents.upperRightY << endl;
-
-	cJSON_Delete(resultJSON);
-
-	return extents;
 }
 

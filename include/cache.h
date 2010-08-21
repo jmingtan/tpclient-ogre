@@ -4,7 +4,8 @@
 #include <vector>
 #include <memory>
 #include <string>
-#include <zmq.hpp>
+
+class Connection;
 
 struct Position {
 	int x, y, z;
@@ -23,13 +24,11 @@ struct MapExtent {
 
 class Cache {
  public:
-	bool connect();
+	Cache(Connection *connection);
 	std::vector<TPObject> getObjects();
-	MapExtent getMapExtents();
 
  protected:
-	std::auto_ptr<zmq::context_t> context;
-	std::auto_ptr<zmq::socket_t> socket;
+	Connection *connection;
 };
 
 #endif // CACHE_H
