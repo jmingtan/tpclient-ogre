@@ -6,7 +6,7 @@
 #include <CEGUI.h>
 
 #include "clientapp.h"
-#include "protocache.h"
+#include "cache.h"
 #include "ceguiutils.h"
 #include "objectoverlay.h"
 

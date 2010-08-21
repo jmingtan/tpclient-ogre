@@ -1,5 +1,5 @@
-#ifndef PROTOCACHE_H
-#define PROTOCACHE_H
+#ifndef CACHE_H
+#define CACHE_H
 
 #include <vector>
 #include <memory>
@@ -32,4 +32,4 @@ class Cache {
 	std::auto_ptr<zmq::socket_t> socket;
 };
 
-#endif
+#endif // CACHE_H
