@@ -18,7 +18,7 @@ ObjectOverlay::ObjectOverlay(Ogre::SceneNode *node, int objectId, std::string na
 void ObjectOverlay::initialise() {
 	OverlayManager *overlayManager = OverlayManager::getSingletonPtr();
 
-	stringstream out;
+	std::stringstream out;
 	out << objectId;
 
 	string panelName = "Panel" + out.str();
