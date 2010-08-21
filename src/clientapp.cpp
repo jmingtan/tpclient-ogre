@@ -1,4 +1,4 @@
-#include "protoapp.h"
+#include "clientapp.h"
 
 #include <string>
 
@@ -9,7 +9,7 @@ using namespace std;
 
 const string title = "Thousand Parsec";
 
-bool PrototypeApplication::setupApplication() {
+bool ClientApplication::setupApplication() {
 	createLogger();
 	root = auto_ptr<Ogre::Root>(new Ogre::Root("plugins.cfg", "ogre.cfg"));
 
@@ -29,10 +29,10 @@ bool PrototypeApplication::setupApplication() {
 	return true;
 }
 
-void PrototypeApplication::createLogger() {
+void ClientApplication::createLogger() {
 }
 
-void PrototypeApplication::setupResources() {
+void ClientApplication::setupResources() {
 	Ogre::ConfigFile *config = new Ogre::ConfigFile();
 	config->load("resources.cfg");
 	Ogre::ConfigFile::SectionIterator seci = config->getSectionIterator();
@@ -47,7 +47,7 @@ void PrototypeApplication::setupResources() {
 	}
 }
 
-bool PrototypeApplication::configure() {
+bool ClientApplication::configure() {
 	bool carryOn = true;
 	if (root.get()->restoreConfig() == false) {
 		carryOn = root.get()->showConfigDialog();
@@ -58,43 +58,43 @@ bool PrototypeApplication::configure() {
 	return carryOn;
 }
 
-void PrototypeApplication::chooseSceneManager() {
+void ClientApplication::chooseSceneManager() {
 	sceneManager = root.get()->createSceneManager(Ogre::ST_GENERIC, "DefaultSM");
 }
 
-void PrototypeApplication::createCamera() {
+void ClientApplication::createCamera() {
 	camera = sceneManager->createCamera("PlayerCam");
 	camera->setFixedYawAxis(true, Ogre::Vector3::UNIT_Y);
 	camera->setNearClipDistance(5);
 	camera->setFarClipDistance(0);
 }
 
-void PrototypeApplication::createViewports() {
+void ClientApplication::createViewports() {
 	viewport = renderWindow->addViewport(camera);
 	viewport->setBackgroundColour(Ogre::ColourValue::Black);
 }
 
-void PrototypeApplication::createResourceListener() {
+void ClientApplication::createResourceListener() {
 }
 
-void PrototypeApplication::loadResources() {
+void ClientApplication::loadResources() {
 	Ogre::ResourceGroupManager::getSingleton().initialiseAllResourceGroups();
 }
 
-void PrototypeApplication::createScene() {
+void ClientApplication::createScene() {
 }
 
-void PrototypeApplication::createFrameListener() {
+void ClientApplication::createFrameListener() {
 	frameListener = auto_ptr<FrameListener>(new FrameListener(renderWindow, camera));
 	root.get()->addFrameListener(frameListener.get());
 	frameListener.get()->showDebugOverlay(true);
 }
 
-void PrototypeApplication::createGUIRenderer() {
+void ClientApplication::createGUIRenderer() {
 	CEGUI::OgreRenderer::bootstrapSystem();
 }
 
-void PrototypeApplication::loadGUIScheme() {
+void ClientApplication::loadGUIScheme() {
 	CEGUI::ImagesetManager::getSingleton().create("thousandparsec.imageset");
 	CEGUI::SchemeManager::getSingleton().create("SleekSpace.scheme");
 	CEGUI::System *system = CEGUI::System::getSingletonPtr();
@@ -104,14 +104,14 @@ void PrototypeApplication::loadGUIScheme() {
 	system->injectMousePosition(0, 0);
 }
 
-void PrototypeApplication::start() {
+void ClientApplication::start() {
 	root.get()->startRendering();
 }
 
-Ogre::SceneManager* PrototypeApplication::getSceneManager() {
+Ogre::SceneManager* ClientApplication::getSceneManager() {
 	return sceneManager;
 }
 
-FrameListener* PrototypeApplication::getFrameListener() {
+FrameListener* ClientApplication::getFrameListener() {
 	return frameListener.get();
 }

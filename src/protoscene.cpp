@@ -5,7 +5,7 @@
 
 #include <CEGUI.h>
 
-#include "protoapp.h"
+#include "clientapp.h"
 #include "protocache.h"
 #include "ceguiutils.h"
 #include "objectoverlay.h"
@@ -203,20 +203,3 @@ bool StarmapScene::frameEnded(const Ogre::FrameEvent &evt) {
 	return true;
 }
 
-int main (int argc, char const* argv[]) {
-	//Cache cache;
-	//cache.connect();
-	//std::vector<TPObject> objects = cache.getObjects();
-	//cache.getMapExtents();
-	PrototypeApplication app;
-	if (app.setupApplication()) {
-		Cache *cache = new Cache();
-		StarmapScene scene(cache, app.getSceneManager());
-		scene.setup();
-		app.getFrameListener()->setKeyListener(&scene);
-		app.getFrameListener()->setMouseListener(&scene);
-		app.getFrameListener()->setUpdateListener(&scene);
-		app.start();
-	}
-	return 0;
-}

@@ -6,7 +6,7 @@
 #include <cJSON.h>
 #include <stdlib.h>
 
-#include "protoapp.h"
+#include "clientapp.h"
 #include "protoscene.h"
 
 using namespace zmq;

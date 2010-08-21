@@ -1,5 +1,5 @@
-#ifndef PROTOAPP_H
-#define PROTOAPP_H
+#ifndef CLIENTAPP_H
+#define CLIENTAPP_H
 
 #include "framelistener.h"
 
@@ -8,7 +8,7 @@
 
 class FrameListener;
 
-class PrototypeApplication {
+class ClientApplication {
  public:
 	bool setupApplication();
 	void start();
@@ -37,4 +37,4 @@ class PrototypeApplication {
 	Ogre::Viewport *viewport;
 };
 
-#endif
+#endif // CLIENTAPP_H

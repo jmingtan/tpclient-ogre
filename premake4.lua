@@ -104,7 +104,12 @@ solution "OgreClientPrototyping"
     project "Prototype"
         language "C++"
         kind     "ConsoleApp"
-        files  { "**.h", "src/framelistener.cpp", "src/proto*.cpp", "src/objectoverlay.cpp", "libs/**.c" }
+        files  { "**.h", "src/*.cpp", "utils/ogreclient.cpp", "libs/**.c" }
+
+    project "TestCache"
+        language "C++"
+        kind     "ConsoleApp"
+        files  { "**.h", "src/*.cpp", "utils/testcache.cpp", "libs/**.c" }
 
     project "SceneMgrEnum"
         language "C++"
