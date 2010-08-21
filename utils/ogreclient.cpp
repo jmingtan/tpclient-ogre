@@ -1,5 +1,5 @@
 #include "clientapp.h"
-#include "protoscene.h"
+#include "starmapscene.h"
 #include "cache.h"
 
 int main (int argc, char const* argv[]) {

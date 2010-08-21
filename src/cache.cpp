@@ -7,7 +7,7 @@
 #include <stdlib.h>
 
 #include "clientapp.h"
-#include "protoscene.h"
+#include "starmapscene.h"
 
 using namespace zmq;
 using namespace std;

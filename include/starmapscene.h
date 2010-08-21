@@ -1,5 +1,5 @@
-#ifndef PROTOSCENE_H
-#define PROTOSCENE_H
+#ifndef STARMAPSCENE_H
+#define STARMAPSCENE_H
 
 #include "framekeylistener.h"
 #include "framemouselistener.h"
@@ -47,4 +47,4 @@ class StarmapScene : public FrameKeyListener, public FrameMouseListener, public 
 	int max_zoom_in;
 };
 
-#endif
+#endif // STARMAPSCENE_H

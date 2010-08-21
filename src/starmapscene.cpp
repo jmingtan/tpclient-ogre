@@ -1,4 +1,4 @@
-#include "protoscene.h"
+#include "starmapscene.h"
 
 #include <iostream>
 #include <stdio.h>
