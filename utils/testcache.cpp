@@ -1,8 +1,9 @@
+#include "zmqconnection.h"
 #include "cache.h"
 
 int main (int argc, char const* argv[]) {
-	Cache cache;
-	cache.connect();
+	ZMQConnection connection;
+	connection.connect();
+	Cache cache(&connection);
 	std::vector<TPObject> objects = cache.getObjects();
-	//cache.getMapExtents();
 }
