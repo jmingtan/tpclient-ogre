@@ -116,6 +116,12 @@ solution "OgreClientPrototyping"
         kind     "ConsoleApp"
         files  { "**.h", "utils/scenemgr.cpp" }
 
+    project "Test"
+        language "C++"
+        kind     "ConsoleApp"
+        links { "UnitTest" }
+        files  { "**.h", "src/**.cpp", "tests/**.cpp", "libs/**.c", "utils/unittest.cpp" }
+
     configuration { "Debug*" }
         defines { "_DEBUG", "DEBUG" }
         flags   { "Symbols" }
