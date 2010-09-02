@@ -1,4 +1,4 @@
-#include "zmqconnection.h"
+#include "network/zmqconnection.h"
 
 using namespace zmq;
 using namespace std;

@@ -73,33 +73,33 @@ solution "OgreClientPrototyping"
             --os.execute("cp -r scripts " .. build_dir)
         end
 
-    configuration {"Release", "macosx"}
-        includedirs {
-            os.getenv('OGRE_HOME') .. "/include/OGRE",
-            os.getenv('OGRE_HOME') .. "/include/OIS",
-            os.getenv('OGRE_HOME') .. "/boost_1_42",
-            "/Library/Frameworks/CEGUIBase.framework/Headers",
-            "/Library/Frameworks/CEGUIOgreRenderer.framework/Headers",
-            "include",
-            "libs",
-        }
-        buildoptions { "-fvisibility=hidden" }
-        libdirs { os.getenv('OGRE_HOME') .. "/lib/release" }
-        links { "OIS", "lua", "Ogre.framework", "CEGUIBase.framework",
-            "CEGUILuaScriptModule.framework", "CEGUIOgreRenderer.framework",
-            "Carbon.framework", "IOKit.framework", "zmq" }
-        if _ACTION ~= "clean" and os.get() == "macosx" then
-            os.mkdir(build_dir)
-            os.mkdir(build_dir .. "/Contents")
-            os.mkdir(build_dir .. "/Contents/Resources")
-            os.mkdir(build_dir .. "/Contents/Plugins")
-            os.execute("cp " .. os.getenv('OGRE_HOME') .. "/lib/*.dylib " .. build_dir .. "/Contents/Plugins")
-            os.execute("cp -r " .. os.getenv('CEGUI_HOME') .. "/PlugInBundles/Release/*.bundle " .. build_dir .. "/Contents/Plugins")
-            --os.execute("cp -r media " .. build_dir)
-            --os.execute("cp -r scripts " .. build_dir)
-            --os.execute("cp cfg/osx/*.cfg " .. build_dir .. "/Contents/Resources")
-            os.execute("cp cfg/osx/*.cfg " .. build_dir)
-        end
+    --configuration {"Release", "macosx"}
+        --includedirs {
+            --os.getenv('OGRE_HOME') .. "/include/OGRE",
+            --os.getenv('OGRE_HOME') .. "/include/OIS",
+            --os.getenv('OGRE_HOME') .. "/boost_1_42",
+            --"/Library/Frameworks/CEGUIBase.framework/Headers",
+            --"/Library/Frameworks/CEGUIOgreRenderer.framework/Headers",
+            --"include",
+            --"libs",
+        --}
+        --buildoptions { "-fvisibility=hidden" }
+        --libdirs { os.getenv('OGRE_HOME') .. "/lib/release" }
+        --links { "OIS", "lua", "Ogre.framework", "CEGUIBase.framework",
+            --"CEGUILuaScriptModule.framework", "CEGUIOgreRenderer.framework",
+            --"Carbon.framework", "IOKit.framework", "zmq" }
+        --if _ACTION ~= "clean" and os.get() == "macosx" then
+            --os.mkdir(build_dir)
+            --os.mkdir(build_dir .. "/Contents")
+            --os.mkdir(build_dir .. "/Contents/Resources")
+            --os.mkdir(build_dir .. "/Contents/Plugins")
+            --os.execute("cp " .. os.getenv('OGRE_HOME') .. "/lib/*.dylib " .. build_dir .. "/Contents/Plugins")
+            --os.execute("cp -r " .. os.getenv('CEGUI_HOME') .. "/PlugInBundles/Release/*.bundle " .. build_dir .. "/Contents/Plugins")
+            ----os.execute("cp -r media " .. build_dir)
+            ----os.execute("cp -r scripts " .. build_dir)
+            ----os.execute("cp cfg/osx/*.cfg " .. build_dir .. "/Contents/Resources")
+            --os.execute("cp cfg/osx/*.cfg " .. build_dir)
+        --end
 
     project "Prototype"
         language "C++"
@@ -115,6 +115,16 @@ solution "OgreClientPrototyping"
         language "C++"
         kind     "ConsoleApp"
         files  { "**.h", "utils/scenemgr.cpp" }
+
+    project "Network"
+        language "C++"
+        kind     "StaticLib"
+        includedirs {
+            "include",
+            "libs"
+        }
+        links { "zmq" }
+        files  { "**.h", "src/network/**.cpp", "libs/**.c" }
 
     project "Test"
         language "C++"
