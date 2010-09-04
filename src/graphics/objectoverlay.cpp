@@ -1,4 +1,4 @@
-#include "objectoverlay.h"
+#include "graphics/objectoverlay.h"
 
 #include <sstream>
 #include <cmath>

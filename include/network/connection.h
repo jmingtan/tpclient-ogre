@@ -1,5 +1,5 @@
-#ifndef CONNECTION_H
-#define CONNECTION_H
+#ifndef NETWORK_CONNECTION_H
+#define NETWORK_CONNECTION_H
 
 #include <string>
 
@@ -10,4 +10,5 @@ class Connection {
 	virtual std::string recv() = 0;
 };
 
-#endif // CONNECTION_H
+#endif // NETWORK_CONNECTION_H
+

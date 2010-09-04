@@ -1,7 +1,5 @@
-#ifndef CLIENTAPP_H
-#define CLIENTAPP_H
-
-#include "framelistener.h"
+#ifndef APPLICATION_CLIENTAPP_H
+#define APPLICATION_CLIENTAPP_H
 
 #include <memory>
 #include <Ogre.h>
@@ -37,4 +35,5 @@ class ClientApplication {
 	Ogre::Viewport *viewport;
 };
 
-#endif // CLIENTAPP_H
+#endif // APPLICATION_CLIENTAPP_H
+

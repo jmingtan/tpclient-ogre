@@ -1,7 +1,8 @@
-#include "clientapp.h"
-#include "starmapscene.h"
-#include "cache.h"
-#include "zmqconnection.h"
+#include "application/clientapp.h"
+#include "scenes/starmapscene.h"
+#include "network/cache.h"
+#include "network/zmqconnection.h"
+#include "application/framelistener.h"
 
 int main (int argc, char const* argv[]) {
 	ClientApplication app;

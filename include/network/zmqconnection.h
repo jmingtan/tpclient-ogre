@@ -1,5 +1,5 @@
-#ifndef ZMQCONNECTION_H
-#define ZMQCONNECTION_H
+#ifndef NETWORK_ZMQCONNECTION_H
+#define NETWORK_ZMQCONNECTION_H
 
 #include <memory>
 #include <string>
@@ -18,5 +18,5 @@ class ZMQConnection : public Connection {
 	std::auto_ptr<zmq::socket_t> socket;
 };
 
-#endif // ZMQCONNECTION_H
+#endif // NETWORK_ZMQCONNECTION_H
 

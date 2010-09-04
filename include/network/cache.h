@@ -1,5 +1,5 @@
-#ifndef CACHE_H
-#define CACHE_H
+#ifndef NETWORK_CACHE_H
+#define NETWORK_CACHE_H
 
 #include <vector>
 #include <memory>
@@ -31,4 +31,5 @@ class Cache {
 	Connection *connection;
 };
 
-#endif // CACHE_H
+#endif // NETWORK_CACHE_H
+

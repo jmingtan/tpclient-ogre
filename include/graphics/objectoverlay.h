@@ -1,5 +1,5 @@
-#ifndef OBJECT_OVERLAY_H
-#define OBJECT_OVERLAY_H
+#ifndef GRAPHICS_OBJECTOVERLAY_H
+#define GRAPHICS_OBJECTOVERLAY_H
 
 #include <string>
 #include <vector>
@@ -34,4 +34,4 @@ class ObjectOverlay {
 	//std::vector active;
 };
 
-#endif // OBJECT_OVERLAY_H
+#endif // GRAPHICS_OBJECTOVERLAY_H

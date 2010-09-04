@@ -1,4 +1,4 @@
-#include "framelistener.h"
+#include "application/framelistener.h"
 
 #include <vector>
 #include <string>
@@ -6,9 +6,9 @@
 
 #include <OIS.h>
 
-#include "framekeylistener.h"
-#include "framemouselistener.h"
-#include "frameupdatelistener.h"
+#include "input/framekeylistener.h"
+#include "input/framemouselistener.h"
+#include "application/frameupdatelistener.h"
 
 using namespace std;
 
@@ -140,3 +140,4 @@ void FrameListener::setMouseListener(FrameMouseListener *mouseListener) {
 void FrameListener::setUpdateListener(FrameUpdateListener *updateListener) {
 	this->updateListener = updateListener;
 }
+

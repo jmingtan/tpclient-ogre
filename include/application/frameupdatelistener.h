@@ -1,5 +1,5 @@
-#ifndef FRAMEUPDATELISTENER__H
-#define FRAMEUPDATELISTENER__H
+#ifndef APPLICATION_FRAMEUPDATELISTENER__H
+#define APPLICATION_FRAMEUPDATELISTENER__H
 
 namespace Ogre {
 	class FrameEvent;
@@ -11,4 +11,5 @@ class FrameUpdateListener {
 	virtual bool frameEnded(const Ogre::FrameEvent &evt) = 0;
 };
 
-#endif // FRAMEUPDATELISTENER__H
+#endif // APPLICATION_FRAMEUPDATELISTENER__H
+

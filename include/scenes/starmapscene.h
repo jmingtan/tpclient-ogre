@@ -1,9 +1,9 @@
 #ifndef STARMAPSCENE_H
 #define STARMAPSCENE_H
 
-#include "framekeylistener.h"
-#include "framemouselistener.h"
-#include "frameupdatelistener.h"
+#include "input/framekeylistener.h"
+#include "input/framemouselistener.h"
+#include "application/frameupdatelistener.h"
 
 #include <vector>
 #include <map>

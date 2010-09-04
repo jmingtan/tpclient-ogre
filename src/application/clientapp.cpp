@@ -1,9 +1,11 @@
-#include "clientapp.h"
+#include "application/clientapp.h"
 
 #include <string>
 
 #include <CEGUI.h>
 #include <RendererModules/Ogre/CEGUIOgreRenderer.h>
+
+#include "application/framelistener.h"
 
 using namespace std;
 
@@ -115,3 +117,4 @@ Ogre::SceneManager* ClientApplication::getSceneManager() {
 FrameListener* ClientApplication::getFrameListener() {
 	return frameListener.get();
 }
+

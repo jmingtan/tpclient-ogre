@@ -1,5 +1,5 @@
-#ifndef FRAMELISTENER__H
-#define FRAMELISTENER__H
+#ifndef APPLICATION_FRAMELISTENER__H
+#define APPLICATION_FRAMELISTENER__H
 
 #include <Ogre.h>
 #include <OIS.h>
@@ -40,4 +40,5 @@ class FrameListener : public Ogre::FrameListener, OIS::KeyListener, OIS::MouseLi
 	FrameUpdateListener *updateListener;
 };
 
-#endif
+#endif // APPLICATION_FRAMELISTENER__H
+
