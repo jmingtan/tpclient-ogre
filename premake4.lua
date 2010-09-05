@@ -142,8 +142,8 @@ solution "OgreClientPrototyping"
     project "Test"
         language "C++"
         kind     "ConsoleApp"
-        links { "UnitTest" }
-        files  { "**.h", "src/**.cpp", "tests/**.cpp", "libs/**.c", "utils/unittest.cpp" }
+        links { "UnitTest", "Network" }
+        files  { "**.h", "tests/**.cpp", "libs/**.c", "utils/unittest.cpp" }
 
     configuration { "Debug*" }
         defines { "_DEBUG", "DEBUG" }

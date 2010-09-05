@@ -25,7 +25,19 @@ struct MapExtent {
 class Cache {
  public:
 	Cache(Connection *connection);
+
+	/**
+	 * getObjects() performs the following operations:
+	 * 1. sends "getObjects()" string to connected server
+	 * 2. receives response from server
+	 * 3. parses response into JSON object
+	 * 4. extracts all TP objects from JSON array
+	 * 5. returns a vector of parsed TP objects
+	 */
 	std::vector<TPObject> getObjects();
+
+	TPObject stringToTPObject(int id, std::string str);
+	std::string getServerResponse(std::string query);
 
  protected:
 	Connection *connection;

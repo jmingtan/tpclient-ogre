@@ -17,26 +17,17 @@ Cache::Cache(Connection *connection) {
 std::vector<TPObject> Cache::getObjects() {
 	vector<TPObject> objects;
 
-	string queryString("getObjects()");
-	connection->send(queryString);
-
-	string resultString = connection->recv();
+	string resultString = getServerResponse(string("getObjects()"));
 	cout << resultString << endl;
 
 	cJSON* resultJSON = cJSON_Parse(resultString.c_str());
 	int i;
 	cJSON* tempJSON = resultJSON->child;
 	for (i = 0; i < cJSON_GetArraySize(resultJSON); i++) {
-		TPObject object;
-		cJSON* posArray = tempJSON->child->next->child;
+		string objectString = cJSON_Print(tempJSON);
+		int id = atoi(tempJSON->string);
 
-		object.name = tempJSON->child->valuestring;
-		object.id = atoi(tempJSON->string);
-		Position pos;
-		pos.x = posArray->valueint; posArray = posArray->next;
-		pos.y = posArray->valueint; posArray = posArray->next;
-		pos.z = posArray->valueint; posArray = posArray->next;
-		object.pos = pos;
+		TPObject object = stringToTPObject(id, objectString);
 		tempJSON = tempJSON->next;
 
 		objects.push_back(object);
@@ -46,3 +37,25 @@ std::vector<TPObject> Cache::getObjects() {
 	return objects;
 }
 
+TPObject Cache::stringToTPObject(int id, std::string str) {
+	TPObject object;
+	cJSON* resultJSON = cJSON_Parse(str.c_str());
+
+	cJSON* posArray = resultJSON->child->next->child;
+
+	object.name = resultJSON->child->valuestring;
+	object.id = id;
+	Position pos;
+	pos.x = posArray->valueint; posArray = posArray->next;
+	pos.y = posArray->valueint; posArray = posArray->next;
+	pos.z = posArray->valueint; posArray = posArray->next;
+	object.pos = pos;
+
+	cJSON_Delete(resultJSON);
+	return object;
+}
+
+std::string Cache::getServerResponse(std::string query) {
+	connection->send(query);
+	return connection->recv();
+}
