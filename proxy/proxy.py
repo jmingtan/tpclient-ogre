@@ -32,15 +32,15 @@ class GUI(object):
 
 	def Post(self, event):
 		"""Post an Event into the current window"""
-		print socket.send("%s %s" % (event.__class__, json.dumps(evt.__dict__))
-		
+		#print socket.send("%s %s" % (event.__class__, json.dumps(evt.__dict__)))
+
 	def Cleanup(self):
 		self.application.Exit()
 		self.application.finder.remote.exit()
 
 	def start(self):
 		print "connecting"
-		self.application.network.Call(self.connect, "localhost", "jmtan", "123", True)
+		self.application.network.Call(self.connect, "192.168.1.115", "jmtan", "123", True)
 		while not self.connected:
 			pass
 
@@ -128,7 +128,7 @@ def serve(cache):
 		starmap = Map(cache.objects)
 		starmap.update()
 		for obj in cache.objects.values():
-			objects[obj.id] = starmap.getScaledPosition(obj.Positional[0][0])
+			objects[obj.id] = [obj.name, starmap.getScaledPosition(obj.Positional[0][0])]
 		return objects
 
 	def getMapExtents():

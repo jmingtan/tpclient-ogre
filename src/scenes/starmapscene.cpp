@@ -180,6 +180,10 @@ bool StarmapScene::mouseMoved(const OIS::MouseEvent &e) {
 bool StarmapScene::mousePressed(const OIS::MouseEvent &e, OIS::MouseButtonID id) {
 	CEGUI::MouseButton button = convertOISButtonToCEGUI(id);
 	CEGUI::System::getSingleton().injectMouseButtonDown(button);
+	if (e.state.buttonDown(OIS::MB_Left))
+		cout << "Left button pressed" << endl;
+	if (e.state.buttonDown(OIS::MB_Right))
+		cout << "Right button pressed" << endl;
 	return true;
 }
 

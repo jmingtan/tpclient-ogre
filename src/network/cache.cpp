@@ -17,7 +17,7 @@ Cache::Cache(Connection *connection) {
 std::vector<TPObject> Cache::getObjects() {
 	vector<TPObject> objects;
 
-	string resultString = getServerResponse(string("getObjects()"));
+	string resultString = getServerResponse(string("{\"message\": \"getObjects\", \"parameters\": null}"));
 	cout << resultString << endl;
 
 	cJSON* resultJSON = cJSON_Parse(resultString.c_str());
