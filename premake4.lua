@@ -92,20 +92,42 @@ solution "OgreClientPrototyping"
             os.execute("cp cfg/osx/*.cfg " .. build_dir)
         end
 
+    project "Network"
+        language "C++"
+        kind     "StaticLib"
+        files  { "**.h", "src/network/*.cpp", "libs/cJSON.c" }
+
+    project "Graphics"
+        language "C++"
+        kind     "StaticLib"
+        files  { "**.h", "src/graphics/*.cpp" }
+
+    project "Scenes"
+        language "C++"
+        kind     "StaticLib"
+        files  { "**.h", "src/scenes/*.cpp" }
+
+    project "App"
+        language "C++"
+        kind     "StaticLib"
+        files  { "**.h", "src/app/*.cpp" }
+
     project "Prototype"
         language "C++"
         kind     "ConsoleApp"
-        files  { "**.h", "src/*.cpp", "utils/ogreclient.cpp", "libs/**.c" }
+        links { "Network", "Graphics", "Scenes", "App" }
+        files  { "**.h", "src/main/ogreclient.cpp" }
 
     project "TestCache"
         language "C++"
         kind     "ConsoleApp"
-        files  { "**.h", "src/*.cpp", "utils/testcache.cpp", "libs/**.c" }
+        links { "Network" }
+        files  { "**.h", "src/main/testcache.cpp" }
 
     project "SceneMgrEnum"
         language "C++"
         kind     "ConsoleApp"
-        files  { "**.h", "utils/scenemgr.cpp" }
+        files  { "src/main/scenemgr.cpp" }
 
     configuration { "Debug*" }
         defines { "_DEBUG", "DEBUG" }
