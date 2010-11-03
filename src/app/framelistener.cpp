@@ -1,4 +1,4 @@
-#include "framelistener.h"
+#include "app/framelistener.h"
 
 #include <vector>
 #include <string>
@@ -6,9 +6,9 @@
 
 #include <OIS.h>
 
-#include "framekeylistener.h"
-#include "framemouselistener.h"
-#include "frameupdatelistener.h"
+#include "app/framekeylistener.h"
+#include "app/framemouselistener.h"
+#include "app/frameupdatelistener.h"
 
 using namespace std;
 

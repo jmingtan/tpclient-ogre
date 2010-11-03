@@ -1,12 +1,10 @@
 #ifndef CLIENTAPP_H
 #define CLIENTAPP_H
 
-#include "framelistener.h"
+#include "app/framelistener.h"
 
 #include <memory>
 #include <Ogre.h>
-
-class FrameListener;
 
 class ClientApplication {
  public:

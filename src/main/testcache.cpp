@@ -1,5 +1,5 @@
-#include "zmqconnection.h"
-#include "cache.h"
+#include "network/zmqconnection.h"
+#include "network/cache.h"
 
 int main (int argc, char const* argv[]) {
 	ZMQConnection connection;

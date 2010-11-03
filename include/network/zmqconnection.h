@@ -5,7 +5,7 @@
 #include <string>
 #include <zmq.hpp>
 
-#include "connection.h"
+#include "network/connection.h"
 
 class ZMQConnection : public Connection {
  public:

@@ -1,4 +1,4 @@
-#include "cache.h"
+#include "network/cache.h"
 
 #include <string>
 #include <vector>
@@ -6,9 +6,7 @@
 #include <cJSON.h>
 #include <stdlib.h>
 
-#include "clientapp.h"
-#include "starmapscene.h"
-#include "connection.h"
+#include "network/connection.h"
 
 using namespace std;
 

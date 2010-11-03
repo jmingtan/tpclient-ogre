@@ -1,14 +1,13 @@
-#include "starmapscene.h"
+#include "scenes/starmapscene.h"
 
 #include <iostream>
 #include <stdio.h>
 
 #include <CEGUI.h>
 
-#include "clientapp.h"
-#include "cache.h"
+#include "network/cache.h"
 #include "ceguiutils.h"
-#include "objectoverlay.h"
+#include "graphics/objectoverlay.h"
 
 using namespace Ogre;
 using namespace std;
