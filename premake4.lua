@@ -89,7 +89,7 @@ solution "OgreClientPrototyping"
             os.execute("cp -r " .. os.getenv('CEGUI_HOME') .. "/PlugInBundles/Release/*.bundle " .. build_dir .. "/Contents/Plugins")
             --os.execute("cp cfg/osx/*.cfg " .. build_dir .. "/Contents/Resources")
             os.execute("cp cfg/*.cfg " .. build_dir)
-            os.execute("cp cfg/osx/*.cfg " .. build_dir)
+            os.execute("cp cfg/osx/* " .. build_dir)
         end
 
     project "Network"
