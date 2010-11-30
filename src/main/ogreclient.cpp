@@ -15,6 +15,7 @@ int main (int argc, char const* argv[]) {
 		app.getFrameListener()->setMouseListener(&scene);
 		app.getFrameListener()->setUpdateListener(&scene);
 		app.start();
+		cache->quit();
 		delete cache;
 		delete connection;
 	}

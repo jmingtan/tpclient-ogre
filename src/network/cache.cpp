@@ -46,3 +46,8 @@ std::vector<TPObject> Cache::getObjects() {
 	return objects;
 }
 
+void Cache::quit() {
+	string queryString("quit()");
+	connection->send(queryString);
+}
+

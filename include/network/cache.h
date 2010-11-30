@@ -26,6 +26,7 @@ class Cache {
  public:
 	Cache(Connection *connection);
 	std::vector<TPObject> getObjects();
+	void quit();
 
  protected:
 	Connection *connection;
