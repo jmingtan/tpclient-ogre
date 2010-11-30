@@ -79,7 +79,7 @@ solution "OgreClientPrototyping"
         libdirs { os.getenv('OGRE_HOME') .. "/lib/release" }
         links { "OIS", "Ogre.framework", "CEGUIBase.framework",
             "CEGUILuaScriptModule.framework", "CEGUIOgreRenderer.framework",
-            "Carbon.framework", "IOKit.framework", "zmq" }
+            "Carbon.framework", "Cocoa.framework", "IOKit.framework", "zmq" }
         if _ACTION ~= "clean" and os.get() == "macosx" then
             os.mkdir(build_dir)
             os.mkdir(build_dir .. "/Contents")
